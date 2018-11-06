@@ -1,0 +1,61 @@
+import java.util.Scanner;
+/**
+ *
+ * @author luisvelazquez
+ */
+public class GreedyCoin {
+    
+    static  int amount;
+    public static void main (String [] args)
+    {
+        Scanner input = new Scanner(System.in);
+        // array for coin values
+        int [] coinValues = {25, 10, 5, 1};
+        
+        System.out.print("Enter an amount in cents: ");
+        amount = input.nextInt();
+        
+        
+       leastCoins(coinValues, amount);
+        
+    }
+    
+    public static void leastCoins(int [] coins, int amount)
+    {
+        int count = 0;
+        int amountCopy = amount;
+        int index = 0;
+        
+        int [] amountOfCoins = new int[coins.length];
+        
+        while(amountCopy > 0)
+        {
+            while(coins[index] <= amountCopy)
+            {
+                count++;
+                amountCopy = amountCopy - coins[index];
+            }
+            
+            if(count > 0)
+            {
+                amountOfCoins[index]= count;
+            }
+                count = 0;
+                index++;
+            
+        }
+      
+        
+        System.out.println();
+        System.out.println("The coins needed to make " + amount + " is: ");
+        
+        for(int i = 0; i < coins.length; i++)
+        {
+            if(amountOfCoins[i] > 0)
+            {
+                System.out.print(coins[i] + ": " + amountOfCoins[i] + ", ");
+            }
+        }
+    }
+    
+}
